@@ -1,0 +1,1016 @@
+<html><head><title>NS1 file how-to</title>
+		
+		<meta http-equiv="Content-Language" content="en-us">
+		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head>
+	<body>
+		<h1>How to read and write .NS1 files</h1>
+		<p>Copyright © Marius Milner, 2003-2004</p>
+		<h2>Important Note</h2>
+		<p>This document is provided as-is and with no support or warranty, implied or 
+			otherwise. You may not redistribute it, even in unmodified form. You may 
+			redistribute source code, compiled libraries or executables based on it. You may store a 
+			copy on your own computer for backup or reference purposes. Don't be evil.</p>
+		<h2>History of this document</h2>
+		<table id="AutoNumber2" border="1" cellspacing="0">
+			<tbody><tr>
+				<th bgcolor="#ccccff">
+					Date</th>
+				<th bgcolor="#ccccff">
+					What changed</th>
+			</tr>
+			<tr>
+				<td>April 17, 2003</td>
+				<td>Initial version detailing file versions 8 and below.</td>
+			</tr>
+			<tr>
+				<td>May 8, 2003</td>
+				<td>Added table of program/file version numbers.</td>
+			</tr>
+			<tr>
+				<td>December 6, 2003</td>
+				<td>Details of file version 11,12.</td>
+			</tr>
+			<tr>
+				<td>April 22, 2004</td>
+				<td>Update for software release 0.4.0.</td>
+			</tr>
+		</tbody></table>
+		<h2>Introduction</h2>
+		<p>This document describes the NetStumbler file format. It is primarily intended 
+			for people wanting to read NS1 files (for example, to be able to import them 
+			into mapping software), however there may be others that want to write their 
+			own NS1 files. If you do write your own NS1 files, it is your responsibility to 
+			make sure that you test them with NetStumbler.</p>
+		<p>You are expected to be able to understand the data fields that you care about, 
+			and silently copy the ones that you don't care about.</p>
+		<h2>File versions</h2>
+		<p>As the file format changes, the version number increases. Each version of 
+			NetStumbler and MiniStumbler is able to read files created by earlier versions; 
+			however they only write the version in effect when they were released. The 
+			following table describes the file version numbers and which releases of 
+			NetStumbler and MiniStumbler use them. Please note that only file versions 
+			highlighted with a yellow background will be seen in practice. I have some 
+			files of the other versions, but nobody else does and I don't plan to give them 
+			away.</p>
+		<table id="AutoNumber1" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th rowspan="2" bgcolor="#ccccff" width="20%">
+					File Version</th>
+				<th rowspan="2" bgcolor="#ccccff" width="20%">
+					Date Introduced</th>
+				<th rowspan="2" bgcolor="#ccccff" width="20%">
+					What was added</th>
+				<th colspan="2" bgcolor="#ccccff" width="40%">
+					Program Versions that <u>write</u> this File Version</th>
+			</tr>
+			<tr>
+				<th bgcolor="#ccccff" width="20%">
+					NetStumbler</th>
+				<th bgcolor="#ccccff" width="20%">
+					MiniStumbler</th>
+			</tr>
+			<tr>
+				<td bgcolor="#ffffcc" width="20%">1</td>
+				<td bgcolor="#ffffcc" width="20%">May 14, 2001</td>
+				<td bgcolor="#ffffcc" width="20%">SSID, BSSID, maximum signal, minimum noise, 
+					maximum SNR, channel number</td>
+				<td bgcolor="#ffffcc" width="20%">0.2</td>
+				<td bgcolor="#ffffcc" width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">2</td>
+				<td width="20%">May 17, 2001</td>
+				<td width="20%">GPS position of AP</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">3</td>
+				<td width="20%">May 22, 2001</td>
+				<td width="20%">For each AP, a record of data containing time, signal, noise, and 
+					GPS</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">4</td>
+				<td width="20%">May 25, 2001</td>
+				<td width="20%">AP Name</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">5</td>
+				<td width="20%">June 8, 2001</td>
+				<td width="20%">Time as FILETIME not time_t</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffffcc" width="20%">6</td>
+				<td bgcolor="#ffffcc" width="20%">June 12, 2001</td>
+				<td bgcolor="#ffffcc" width="20%">Multiple channel numbers as 32-bit field</td>
+				<td bgcolor="#ffffcc" width="20%">0.3, 0.3.10, 0.3.20, 0.3.21, 0.3.22, 0.3.23</td>
+				<td bgcolor="#ffffcc" width="20%">0.3.23</td>
+			</tr>
+			<tr>
+				<td width="20%">7</td>
+				<td width="20%">June 23, 2002</td>
+				<td width="20%">Channel numbers</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffffcc" width="20%">8</td>
+				<td bgcolor="#ffffcc" width="20%">July 2, 2002</td>
+				<td bgcolor="#ffffcc" width="20%">IP Address of AP</td>
+				<td bgcolor="#ffffcc" width="20%">0.3.30</td>
+				<td bgcolor="#ffffcc" width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">9</td>
+				<td width="20%">August 21, 2002</td>
+				<td width="20%">Minimum signal, maximum noise</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td width="20%">10</td>
+				<td width="20%">April 28, 2003</td>
+				<td width="20%">Reported maximum data rate</td>
+				<td width="20%">None</td>
+				<td width="20%">None</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffffcc" width="20%">11</td>
+				<td bgcolor="#ffffcc" width="20%">June 4, 2003</td>
+				<td bgcolor="#ffffcc" width="20%">IP Subnet and Mask</td>
+				<td bgcolor="#ffffcc" width="20%">Early 0.3.99</td>
+				<td bgcolor="#ffffcc" width="20%">Early 0.3.99</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffffcc" width="20%">12</td>
+				<td bgcolor="#ffffcc" width="20%">December 6, 2003</td>
+				<td bgcolor="#ffffcc" width="20%">AP Misc Flags</td>
+				<td bgcolor="#ffffcc" width="20%">0.3.99, 0.4.0</td>
+				<td bgcolor="#ffffcc" width="20%">0.3.99, 0.4.0</td>
+			</tr>
+		</tbody></table>
+		<h2>Note about data types</h2>
+		<p>Most structures are variable-length. No provision is made to assist file 
+			indexing or skipping unwanted data.</p>
+		<p>No padding bytes are added.</p>
+		<p>All integer types are little-endian (least significant byte first).</p>
+		<p>For those not familiar with it, a FILETIME is a 64-bit integer defined to be the 
+			number of 100-nanosecond increments since January 1, 1601 (UTC).</p>
+		<h2>Data Format Description - Current</h2>
+		<h3>NS1 File (All Versions)</h3>
+		<table id="AutoNumber3" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">dwSignature</td>
+				<td width="15%">char[4]</td>
+				<td width="55%">File Signature ('NetS')</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">dwFileVer</td>
+				<td width="15%">uint32</td>
+				<td width="55%">File Format Version</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">ApCount</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Number of APINFO entries that follow</td>
+			</tr>
+			<tr>
+				<td width="15%">Variable</td>
+				<td width="15%">ApInfo</td>
+				<td width="15%">APINFO[]</td>
+				<td width="55%"><i>ApCount</i> APINFO entries</td>
+			</tr>
+		</tbody></table>
+		<h3>APINFO Entry (Version 12)</h3>
+		<table id="AutoNumber4" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">SSIDLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of SSID</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>SSIDLength</i></td>
+				<td width="15%">SSID</td>
+				<td width="15%">char[]</td>
+				<td width="55%">SSID (<i>SSIDLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td width="15%">6</td>
+				<td width="15%">BSSID</td>
+				<td width="15%">uint8[6]</td>
+				<td width="55%">BSSID</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSignal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MinNoise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Minimum reported noise level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSNR</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal-to-noise ratio, dB</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Flags</td>
+				<td width="15%">uint32</td>
+				<td width="55%">802.11 capability flags</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">BeaconInterval</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Beacon Interval, Kµs</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">FirstSeen</td>
+				<td width="15%">FILETIME</td>
+				<td width="55%">Time first seen</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">LastSeen</td>
+				<td width="15%">FILETIME</td>
+				<td width="55%">Time last seen</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">BestLat</td>
+				<td width="15%">double</td>
+				<td width="55%">Estimated Latitude</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">BestLong</td>
+				<td width="15%">double</td>
+				<td width="55%">Estimated Longitude</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">DataCount</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Number of APDATA entries that follow</td>
+			</tr>
+			<tr>
+				<td width="15%">Variable</td>
+				<td width="15%">ApData</td>
+				<td width="15%">APDATA[]</td>
+				<td width="55%"><i>DataCount</i> APDATA entries</td>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">NameLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of Name</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>NameLength</i></td>
+				<td width="15%">Name</td>
+				<td width="15%">char[]</td>
+				<td width="55%">Name (<i>NameLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Channels</td>
+				<td width="15%">uint64</td>
+				<td width="55%">Bit field indicating channel activity</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">LastChannel</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Last reported channel</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">IPAddress</td>
+				<td width="15%">uint32</td>
+				<td width="55%">IP Address</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MinSignal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Minimum reported signal level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxNoise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported noise level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">DataRate</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Highest reported data rate, units of 100 kbps</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">IPSubnet</td>
+				<td width="15%">uint32</td>
+				<td width="55%">IP Subnet address</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">IPMask</td>
+				<td width="15%">uint32</td>
+				<td width="55%">IP Subnet mask</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">4</td>
+				<td bgcolor="#ccffcc" width="15%">ApFlags</td>
+				<td bgcolor="#ccffcc" width="15%">uint32</td>
+				<td bgcolor="#ccffcc" width="55%">Miscellaneous Flags</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">4</td>
+				<td bgcolor="#ccffcc" width="15%">IELength</td>
+				<td bgcolor="#ccffcc" width="15%">uint32</td>
+				<td bgcolor="#ccffcc" width="55%">Number of bytes that follow (0 except when using 
+					NDIS 5.1 with a WPA capable driver)</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%"><em>IELength</em></td>
+				<td bgcolor="#ccffcc" width="15%">InformationElements</td>
+				<td bgcolor="#ccffcc" width="15%">uint8[]</td>
+				<td bgcolor="#ccffcc" width="55%">802.11 Information Elements</td>
+			</tr>
+		</tbody></table>
+		<h3>APDATA Entry (Version 5 and up)</h3>
+		<table id="AutoNumber5" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Time</td>
+				<td width="15%">FILETIME</td>
+				<td width="55%">Time that this data was collected</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Signal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Reported Signal, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Noise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Reported Noise, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Location Source</td>
+				<td width="15%">int32</td>
+				<td width="55%">Kind of location fix (None=0, GPS=1)</td>
+			</tr>
+			<tr>
+				<td width="15%">0 or sizeof(GPSDATA)</td>
+				<td width="15%">GpsData</td>
+				<td width="15%">GPSDATA</td>
+				<td width="55%">If LocationSource is None(0), this structure is not present.</td>
+			</tr>
+		</tbody></table>
+		<h3>GPSDATA Entry (Version 3 and up)</h3>
+		<table id="AutoNumber6" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Latitude</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported latitude</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Longitude</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported longitude</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Altitude</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported altitude</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">NumSats</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Number of satellites in view of GPS receiver</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Speed</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported speed</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Track</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported track</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">MagVariation</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported magnetic variation</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">Hdop</td>
+				<td width="15%">double</td>
+				<td width="55%">Reported HDOP</td>
+			</tr>
+		</tbody></table>
+		<h2>Data Format Description - Old Versions</h2>
+		<p>You may see NS1 files with older version numbers than the current one. The 
+			following tables will help you to interpret them. Entries are highlighted with 
+			a pink background if they were deleted or replaced in the next file version, 
+			and with a green background if they are new since the previous documented 
+			version.</p>
+		<h3>APINFO Entry (Version 11)</h3>
+		<h3>
+			<table id="Table1" border="1" cellspacing="0" width="100%">
+				<tbody><tr>
+					<th bgcolor="#ccccff" width="15%">
+						Size (Bytes)</th>
+					<th bgcolor="#ccccff" width="15%">
+						Name</th>
+					<th bgcolor="#ccccff" width="15%">
+						Type</th>
+					<th bgcolor="#ccccff" width="55%">
+						Description</th></tr>
+				<tr>
+					<td width="15%">1</td>
+					<td width="15%">SSIDLength</td>
+					<td width="15%">uint8</td>
+					<td width="55%">Length of SSID</td>
+				</tr>
+				<tr>
+					<td width="15%"><i>SSIDLength</i></td>
+					<td width="15%">SSID</td>
+					<td width="15%">char[]</td>
+					<td width="55%">SSID (<i>SSIDLength</i> characters, no terminating null)</td>
+				</tr>
+				<tr>
+					<td width="15%">6</td>
+					<td width="15%">BSSID</td>
+					<td width="15%">uint8[6]</td>
+					<td width="55%">BSSID</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">MaxSignal</td>
+					<td width="15%">int32</td>
+					<td width="55%">Maximum reported signal level, dBm</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">MinNoise</td>
+					<td width="15%">int32</td>
+					<td width="55%">Minimum reported noise level, dBm</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">MaxSNR</td>
+					<td width="15%">int32</td>
+					<td width="55%">Maximum reported signal-to-noise ratio, dB</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">Flags</td>
+					<td width="15%">uint32</td>
+					<td width="55%">802.11 capability flags</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">BeaconInterval</td>
+					<td width="15%">uint32</td>
+					<td width="55%">Beacon Interval, Kµs</td>
+				</tr>
+				<tr>
+					<td width="15%">8</td>
+					<td width="15%">FirstSeen</td>
+					<td width="15%">FILETIME</td>
+					<td width="55%">Time first seen</td>
+				</tr>
+				<tr>
+					<td width="15%">8</td>
+					<td width="15%">LastSeen</td>
+					<td width="15%">FILETIME</td>
+					<td width="55%">Time last seen</td>
+				</tr>
+				<tr>
+					<td width="15%">8</td>
+					<td width="15%">BestLat</td>
+					<td width="15%">double</td>
+					<td width="55%">Estimated Latitude</td>
+				</tr>
+				<tr>
+					<td width="15%">8</td>
+					<td width="15%">BestLong</td>
+					<td width="15%">double</td>
+					<td width="55%">Estimated Longitude</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">DataCount</td>
+					<td width="15%">uint32</td>
+					<td width="55%">Number of APDATA entries that follow</td>
+				</tr>
+				<tr>
+					<td width="15%">Variable</td>
+					<td width="15%">ApData</td>
+					<td width="15%">APDATA[]</td>
+					<td width="55%"><i>DataCount</i> APDATA entries</td>
+				</tr>
+				<tr>
+					<td width="15%">1</td>
+					<td width="15%">NameLength</td>
+					<td width="15%">uint8</td>
+					<td width="55%">Length of Name</td>
+				</tr>
+				<tr>
+					<td width="15%"><i>NameLength</i></td>
+					<td width="15%">Name</td>
+					<td width="15%">char[]</td>
+					<td width="55%">Name (<i>NameLength</i> characters, no terminating null)</td>
+				</tr>
+				<tr>
+					<td width="15%">8</td>
+					<td width="15%">Channels</td>
+					<td width="15%">uint64</td>
+					<td width="55%">Bit field indicating channel activity</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">LastChannel</td>
+					<td width="15%">uint32</td>
+					<td width="55%">Last reported channel</td>
+				</tr>
+				<tr>
+					<td width="15%">4</td>
+					<td width="15%">IPAddress</td>
+					<td width="15%">uint32</td>
+					<td width="55%">IP Address</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ccffcc" width="15%">4</td>
+					<td bgcolor="#ccffcc" width="15%">MinSignal</td>
+					<td bgcolor="#ccffcc" width="15%">int32</td>
+					<td bgcolor="#ccffcc" width="55%">Minimum reported signal level, dBm</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ccffcc" width="15%">4</td>
+					<td bgcolor="#ccffcc" width="15%">MaxNoise</td>
+					<td bgcolor="#ccffcc" width="15%">int32</td>
+					<td bgcolor="#ccffcc" width="55%">Maximum reported noise level, dBm</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ccffcc" width="15%">4</td>
+					<td bgcolor="#ccffcc" width="15%">DataRate</td>
+					<td bgcolor="#ccffcc" width="15%">uint32</td>
+					<td bgcolor="#ccffcc" width="55%">Highest reported data rate, units of 100 kbps</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ccffcc" width="15%">4</td>
+					<td bgcolor="#ccffcc" width="15%">IPSubnet</td>
+					<td bgcolor="#ccffcc" width="15%">uint32</td>
+					<td bgcolor="#ccffcc" width="55%">IP Subnet address</td>
+				</tr>
+				<tr>
+					<td bgcolor="#ccffcc" width="15%">4</td>
+					<td bgcolor="#ccffcc" width="15%">IPMask</td>
+					<td bgcolor="#ccffcc" width="15%">uint32</td>
+					<td bgcolor="#ccffcc" width="55%">IP Subnet mask</td>
+				</tr>
+			</tbody></table>
+		</h3>
+		<h3>APINFO Entry (Version 8)</h3>
+		<table id="AutoNumber8" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">SSIDLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of SSID</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>SSIDLength</i></td>
+				<td width="15%">SSID</td>
+				<td width="15%">char[]</td>
+				<td width="55%">SSID (<i>SSIDLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td width="15%">6</td>
+				<td width="15%">BSSID</td>
+				<td width="15%">uint8[6]</td>
+				<td width="55%">BSSID</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSignal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MinNoise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Minimum reported noise level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSNR</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal-to-noise ratio, dB</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Flags</td>
+				<td width="15%">uint32</td>
+				<td width="55%">802.11 capability flags</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">BeaconInterval</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Beacon Interval, Kµs</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">FirstSeen</td>
+				<td width="15%">FILETIME</td>
+				<td width="55%">Time first seen</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">LastSeen</td>
+				<td width="15%">FILETIME</td>
+				<td width="55%">Time last seen</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">BestLat</td>
+				<td width="15%">double</td>
+				<td width="55%">Estimated Latitude</td>
+			</tr>
+			<tr>
+				<td width="15%">8</td>
+				<td width="15%">BestLong</td>
+				<td width="15%">double</td>
+				<td width="55%">Estimated Longitude</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">DataCount</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Number of APDATA entries that follow</td>
+			</tr>
+			<tr>
+				<td width="15%">Variable</td>
+				<td width="15%">ApData</td>
+				<td width="15%">APDATA[]</td>
+				<td width="55%"><i>DataCount</i> APDATA entries</td>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">NameLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of Name</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>NameLength</i></td>
+				<td width="15%">Name</td>
+				<td width="15%">char[]</td>
+				<td width="55%">Name (<i>NameLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">8</td>
+				<td bgcolor="#ccffcc" width="15%">Channels</td>
+				<td bgcolor="#ccffcc" width="15%">uint64</td>
+				<td bgcolor="#ccffcc" width="55%">Bit field indicating channel activity</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">4</td>
+				<td bgcolor="#ccffcc" width="15%">LastChannel</td>
+				<td bgcolor="#ccffcc" width="15%">uint32</td>
+				<td bgcolor="#ccffcc" width="55%">Last reported channel</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">4</td>
+				<td bgcolor="#ccffcc" width="15%">IPAddress</td>
+				<td bgcolor="#ccffcc" width="15%">uint32</td>
+				<td bgcolor="#ccffcc" width="55%">IP Address</td>
+			</tr>
+		</tbody></table>
+		<h3>APINFO Entry (Version 6)</h3>
+		<table id="AutoNumber10" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">SSIDLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of SSID</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>SSIDLength</i></td>
+				<td width="15%">SSID</td>
+				<td width="15%">char[]</td>
+				<td width="55%">SSID (<i>SSIDLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td width="15%">6</td>
+				<td width="15%">BSSID</td>
+				<td width="15%">uint8[6]</td>
+				<td width="55%">BSSID</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSignal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MinNoise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Minimum reported noise level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSNR</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal-to-noise ratio, dB</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffcccc" width="15%">4</td>
+				<td bgcolor="#ffcccc" width="15%">Channels32</td>
+				<td bgcolor="#ffcccc" width="15%">uint32</td>
+				<td bgcolor="#ffcccc" width="55%">Bit field indicating channel activity</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Flags</td>
+				<td width="15%">uint32</td>
+				<td width="55%">802.11 capability flags</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">BeaconInterval</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Beacon Interval, Kµs</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">8</td>
+				<td bgcolor="#ccffcc" width="15%">FirstSeen</td>
+				<td bgcolor="#ccffcc" width="15%">FILETIME</td>
+				<td bgcolor="#ccffcc" width="55%">Time first seen</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">8</td>
+				<td bgcolor="#ccffcc" width="15%">LastSeen</td>
+				<td bgcolor="#ccffcc" width="15%">FILETIME</td>
+				<td bgcolor="#ccffcc" width="55%">Time last seen</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">8</td>
+				<td bgcolor="#ccffcc" width="15%">BestLat</td>
+				<td bgcolor="#ccffcc" width="15%">double</td>
+				<td bgcolor="#ccffcc" width="55%">Estimated Latitude</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">8</td>
+				<td bgcolor="#ccffcc" width="15%">BestLong</td>
+				<td bgcolor="#ccffcc" width="15%">double</td>
+				<td bgcolor="#ccffcc" width="55%">Estimated Longitude</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">4</td>
+				<td bgcolor="#ccffcc" width="15%">DataCount</td>
+				<td bgcolor="#ccffcc" width="15%">uint32</td>
+				<td bgcolor="#ccffcc" width="55%">Number of APDATA entries that follow</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">Variable</td>
+				<td bgcolor="#ccffcc" width="15%">ApData</td>
+				<td bgcolor="#ccffcc" width="15%">APDATA[]</td>
+				<td bgcolor="#ccffcc" width="55%"><i>DataCount</i> APDATA entries</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%">1</td>
+				<td bgcolor="#ccffcc" width="15%">NameLength</td>
+				<td bgcolor="#ccffcc" width="15%">uint8</td>
+				<td bgcolor="#ccffcc" width="55%">Length of Name</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ccffcc" width="15%"><i>NameLength</i></td>
+				<td bgcolor="#ccffcc" width="15%">Name</td>
+				<td bgcolor="#ccffcc" width="15%">char[]</td>
+				<td bgcolor="#ccffcc" width="55%">Name (<i>NameLength</i> characters, no 
+					terminating null)</td>
+			</tr>
+		</tbody></table>
+		<h3>APINFO Entry (Version 1)</h3>
+		<table id="AutoNumber11" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td width="15%">1</td>
+				<td width="15%">SSIDLength</td>
+				<td width="15%">uint8</td>
+				<td width="55%">Length of SSID</td>
+			</tr>
+			<tr>
+				<td width="15%"><i>SSIDLength</i></td>
+				<td width="15%">SSID</td>
+				<td width="15%">char[]</td>
+				<td width="55%">SSID (<i>SSIDLength</i> characters, no terminating null)</td>
+			</tr>
+			<tr>
+				<td width="15%">6</td>
+				<td width="15%">BSSID</td>
+				<td width="15%">uint8[6]</td>
+				<td width="55%">BSSID</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSignal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MinNoise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Minimum reported noise level, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">MaxSNR</td>
+				<td width="15%">int32</td>
+				<td width="55%">Maximum reported signal-to-noise ratio, dB</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffcccc" width="15%">4</td>
+				<td bgcolor="#ffcccc" width="15%">LastChannel</td>
+				<td bgcolor="#ffcccc" width="15%">uint32</td>
+				<td bgcolor="#ffcccc" width="55%">Last active channel number</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Flags</td>
+				<td width="15%">uint32</td>
+				<td width="55%">802.11 capability flags</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">BeaconInterval</td>
+				<td width="15%">uint32</td>
+				<td width="55%">Beacon Interval, Kµs</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffcccc" width="15%">4</td>
+				<td bgcolor="#ffcccc" width="15%">FirstSeen</td>
+				<td bgcolor="#ffcccc" width="15%">time_t</td>
+				<td bgcolor="#ffcccc" width="55%">Time first seen</td>
+			</tr>
+			<tr>
+				<td bgcolor="#ffcccc" width="15%">4</td>
+				<td bgcolor="#ffcccc" width="15%">LastSeen</td>
+				<td bgcolor="#ffcccc" width="15%">time_t</td>
+				<td bgcolor="#ffcccc" width="55%">Time last seen</td>
+			</tr>
+		</tbody></table>
+		<h3>APDATA Entry (Versions 3-4)</h3>
+		<table id="AutoNumber9" border="1" cellspacing="0" width="100%">
+			<tbody><tr>
+				<th bgcolor="#ccccff" width="15%">
+					Size (Bytes)</th>
+				<th bgcolor="#ccccff" width="15%">
+					Name</th>
+				<th bgcolor="#ccccff" width="15%">
+					Type</th>
+				<th bgcolor="#ccccff" width="55%">
+					Description</th>
+			</tr>
+			<tr>
+				<td bgcolor="#ffcccc" width="15%">4</td>
+				<td bgcolor="#ffcccc" width="15%">Time</td>
+				<td bgcolor="#ffcccc" width="15%">time_t</td>
+				<td bgcolor="#ffcccc" width="55%">Time that this data was collected</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Signal</td>
+				<td width="15%">int32</td>
+				<td width="55%">Reported Signal, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Noise</td>
+				<td width="15%">int32</td>
+				<td width="55%">Reported Noise, dBm</td>
+			</tr>
+			<tr>
+				<td width="15%">4</td>
+				<td width="15%">Location Source</td>
+				<td width="15%">int32</td>
+				<td width="55%">Kind of location fix (None=0, GPS=1)</td>
+			</tr>
+			<tr>
+				<td width="15%">0 or sizeof(GPSDATA)</td>
+				<td width="15%">GpsData</td>
+				<td width="15%">GPSDATA</td>
+				<td width="55%">If LocationSource is None(0), this structure is not present.</td>
+			</tr>
+		</tbody></table>
+		<p>&nbsp;</p>
+		<hr>
+		<p>Copyright © Marius Milner, 2003-2004</p>
+	</body></html>
