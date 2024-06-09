@@ -1,0 +1,11 @@
+----------------------------------------
+File: C:\Documents and Settings\dwk\Desktop\New Folder\-172681.txt
+Signature: NetS
+Version: 12
+Ap Count: 598
+
+At Step 3
+Index: 7
+Offset: 0
+SSID: GateHouseNet
++++++++++++++++++++++++++++++++++++++++++

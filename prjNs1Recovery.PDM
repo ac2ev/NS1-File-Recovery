@@ -1,0 +1,235 @@
+[Root]
+Most Recent Package=Ns1 Recovery
+
+
+[Package|Ns1 Recovery|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\Data\Ns1 File Recovery\Package
+
+[Package|Ns1 Recovery|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Ns1 Recovery|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Ns1 Recovery|Files Found]
+filelist.xml=C:\Data\Ns1 File Recovery\DOC\Help_files\filelist.xml
+Help.htm=C:\Data\Ns1 File Recovery\DOC\Help.htm
+image001.jpg=C:\Data\Ns1 File Recovery\DOC\Help_files\image001.jpg
+image002.jpg=C:\Data\Ns1 File Recovery\DOC\Help_files\image002.jpg
+image011.png=C:\Data\Ns1 File Recovery\Package\Support\image011.png
+
+[Package|Ns1 Recovery|Files Released]
+help.rtf=
+
+[Package|Ns1 Recovery|Missing Dependency Information]
+C:\Program Files\Microsoft Office2000\Office\EXCEL9.OLB=
+C:\Data\Ns1 File Recovery\Thumbnail_Extractor_Code\IVBExtractImageLib.tlb=
+C:\Data\Ns1 File Recovery\Live Update.exe=
+C:\Data\Ns1 File Recovery\IVBExtractImageLib.tlb=
+C:\Program Files\Microsoft Office\OFFICE11\EXCEL.EXE=
+
+[Package|Ns1 Recovery|Out-of-Date Dependency Information]
+C:\WINDOWS\SYSTEM32\MSCOMCT2.OCX=
+C:\WINDOWS\SYSTEM32\ExtLVCTL.ocx=
+C:\WINDOWS\SYSTEM32\RICHTX32.OCX=
+C:\WINDOWS\SYSTEM32\COMDLG32.OCX=
+C:\WINDOWS\SYSTEM32\scrrun.dll=
+
+[Package|Ns1 Recovery|Files Added]
+help.htm=
+image012.jpg=
+filelist.xml=
+image001.jpg=
+image002.jpg=
+image003.png=
+image004.jpg=
+image005.png=
+image006.jpg=
+image007.png=
+image008.jpg=
+image009.png=
+image010.jpg=
+image011.png=
+c:\data\icons\icons.zip=
+c:\data\ns1 file recovery\live update.exe=
+
+[Package|Ns1 Recovery|Files Removed]
+c:\windows\system32\extlvctl.ocx=
+c:\windows\system32\extlvhlp.hlp=
+c:\data\icons\icons.zip=
+c:\program files\microsoft office\office11\excel.exe=
+
+[Package|Ns1 Recovery|Files In Project]
+C:\WINDOWS\SYSTEM32\MSVBVM60.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\SYSTEM32\MSVBVM50.DLL=Yes
+C:\WINDOWS\SYSTEM32\COMDLG32.OCX=Yes
+C:\WINDOWS\SYSTEM32\MSCOMCTL.OCX=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\SYSTEM32\VB6STKIT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+C:\WINDOWS\SYSTEM32\scrrun.dll=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=Yes
+C:\Data\icons\icons.zip=No
+C:\Data\Ns1 File Recovery\Live Update.exe=Yes
+C:\Data\Ns1 File Recovery\EXE\ns1Recovery.exe=Yes
+C:\Program Files\Microsoft Office\OFFICE11\EXCEL.EXE=No
+C:\Data\Ns1 File Recovery\IVBExtractImageLib.tlb=Yes
+C:\Data\Ns1 File Recovery\DOC\Help.htm=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\filelist.xml=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image001.jpg=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image002.jpg=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image003.png=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image004.jpg=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image005.png=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image006.jpg=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image007.png=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image008.jpg=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image009.png=Yes
+C:\Data\Ns1 File Recovery\DOC\Help_files\image010.jpg=Yes
+C:\Data\Ns1 File Recovery\Package\Support\image012.jpg=Yes
+C:\Data\Ns1 File Recovery\Package\Support\image011.png=Yes
+
+[Package|Ns1 Recovery|Configure Registry Files]
+Applicable=No
+
+[Package|Ns1 Recovery|Configure Remote Servers]
+Applicable=No
+
+[Package|Ns1 Recovery|Install Locations]
+C:\Data\Ns1 File Recovery\ns1Recovery.exe=$(AppPath)
+C:\WINDOWS\SYSTEM32\MSVBVM60.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM32\MSVBVM50.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Office2000\Office\EXCEL9.OLB=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\MSCOMCTL.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\comctl32.ocx=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\COMCT332.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\RICHTX32.OCX=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\SYSTEM32\ExtLVCTL.ocx=$(AppPath)
+C:\WINDOWS\SYSTEM32\MSCOMCT2.OCX=$(WinSysPath)
+C:\WINDOWS\SYSTEM32\Extlvhlp.hlp=$(AppPath)
+C:\WINDOWS\SYSTEM32\msstkprp.dll=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\SYSTEM32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+C:\Data\Ns1 File Recovery\Help.rtf=$(AppPath)
+C:\Data\Ns1 File Recovery\Help.htm=$(AppPath)
+C:\Data\Ns1 File Recovery\Help_files\image012.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\filelist.xml=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image001.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image002.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image003.png=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image004.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image005.png=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image006.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image007.png=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image008.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image009.png=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image010.jpg=$(AppPath)\Help_files
+C:\Data\Ns1 File Recovery\Help_files\image011.png=$(AppPath)\Help_files
+C:\WINDOWS\SYSTEM32\scrrun.dll=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+C:\Data\icons\icons.zip=$(AppPath)
+C:\Data\Ns1 File Recovery\Thumbnail_Extractor_Code\IVBExtractImageLib.tlb=$(WinSysPath)
+C:\Data\Ns1 File Recovery\Live Update.exe=$(AppPath)
+C:\Data\Ns1 File Recovery\EXE\ns1Recovery.exe=$(AppPath)
+C:\Program Files\Microsoft Office\OFFICE11\EXCEL.EXE=$(AppPath)
+C:\Data\Ns1 File Recovery\IVBExtractImageLib.tlb=$(WinSysPath)
+C:\Data\Ns1 File Recovery\DOC\Help.htm=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image012.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\filelist.xml=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image001.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image002.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image003.png=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image004.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image005.png=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image006.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image007.png=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image008.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image009.png=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image010.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\DOC\Help_files\image011.png=$(AppPath)
+C:\Data\Ns1 File Recovery\Package\Support\image012.jpg=$(AppPath)
+C:\Data\Ns1 File Recovery\Package\Support\image011.png=$(AppPath)
+
+[Package|Ns1 Recovery|Configure Shared Files]
+Applicable=Yes
+C:\Data\Ns1 File Recovery\ns1Recovery.exe=No
+C:\WINDOWS\SYSTEM32\ExtLVCTL.ocx=No
+C:\WINDOWS\SYSTEM32\Extlvhlp.hlp=No
+C:\Data\Ns1 File Recovery\Help.rtf=No
+C:\Data\Ns1 File Recovery\Help.htm=No
+C:\Data\Ns1 File Recovery\Help_files\image012.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\filelist.xml=No
+C:\Data\Ns1 File Recovery\Help_files\image001.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image002.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image003.png=No
+C:\Data\Ns1 File Recovery\Help_files\image004.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image005.png=No
+C:\Data\Ns1 File Recovery\Help_files\image006.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image007.png=No
+C:\Data\Ns1 File Recovery\Help_files\image008.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image009.png=No
+C:\Data\Ns1 File Recovery\Help_files\image010.jpg=No
+C:\Data\Ns1 File Recovery\Help_files\image011.png=No
+C:\Data\icons\icons.zip=No
+C:\Data\Ns1 File Recovery\Live Update.exe=No
+C:\Data\Ns1 File Recovery\EXE\ns1Recovery.exe=No
+C:\Program Files\Microsoft Office\OFFICE11\EXCEL.EXE=No
+C:\Data\Ns1 File Recovery\DOC\Help.htm=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image012.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\filelist.xml=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image001.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image002.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image003.png=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image004.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image005.png=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image006.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image007.png=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image008.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image009.png=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image010.jpg=No
+C:\Data\Ns1 File Recovery\DOC\Help_files\image011.png=No
+C:\Data\Ns1 File Recovery\Package\Support\image012.jpg=No
+C:\Data\Ns1 File Recovery\Package\Support\image011.png=No
+
+[Package|Ns1 Recovery|Distribution]
+Type=single
+Size=
+Title=Ns1 File Recovery and Conversion Program
+
+[Package|Ns1 Recovery|Package]
+PackageFolder=C:\Data\Ns1 File Recovery\Package
+ProjectFolder=C:\Data\Ns1 File Recovery
+ServerSideCab=
+File1=C:\Data\Ns1 File Recovery\Package\setup.exe
+File2=C:\Data\Ns1 File Recovery\Package\Setup.Lst
+File3=C:\Data\Ns1 File Recovery\Package\ns1Recovery.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+[Package|Ns1 Recovery|IconGroups]
+Group0=Ns1 File Recovery Program
+PrivateGroup0=-1
+Parent0=$(Programs)
+
+[Package|Ns1 Recovery|Ns1 File Recovery Program]
+Icon1=ns1Recovery.exe
+Title1=Ns1 File Recovery Program
+StartIn1=$(AppPath)
+Key1=Icon1
