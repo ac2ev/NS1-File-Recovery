@@ -1,4 +1,4 @@
-All the way from 2007 when Wardriving was at it's peak and I was in the top 5 on Wigle.	
+All the way from 2007 when Wardriving was at its peak and I was in the top 5 on Wigle.	
 
 How to repair a Corrupted NS1 file
 Assumptions:  This page assumes you know how to download and extract a file to your own system.  If you don't know how to do that, you probably shouldn't be attempting this procedure.
